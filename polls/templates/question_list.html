@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список питань</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список всіх питань</h1>
+
+    {% if questions %}
+        <ul>
+        {% for question in questions %}
+            <li>
+                <strong>{{ question.question_text }}</strong>
+                <p>Дата публікації: {{ question.pub_date }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Питань поки немає.</p>
+    {% endif %}
+</body>
+</html>
