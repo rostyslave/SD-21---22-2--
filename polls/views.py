@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from .Forms import UserRegistrationForm, UserLoginForm
 from .models import Question
 
@@ -55,3 +54,18 @@ def logout_view(request):
     logout(request)
     messages.info(request, "Ви успішно вийшли з системи!")
     return redirect('login')
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Question
+from .serializers import QuestionSerializer
+
+class QuestionListView(APIView):
+    """
+    API view для отримання списку всіх питань.
+    """
+    def get(self, request):
+        questions = Question.objects.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
